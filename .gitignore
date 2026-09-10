@@ -12,4 +12,23 @@
 /captures
 .externalNativeBuild
 .cxx
+
+# IDE - IntelliJ
+.idea/
+*.iws
+*.out
+*.app
+
+# Android
+app/google-services.json
+.cxx/
+*.apk
+*.ap_
+*.dex
+*.class
+bin/
+gen/
+
+# Secrets
 local.properties
+secrets.xml
