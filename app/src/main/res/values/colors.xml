@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- RentFlow Light Green Theme Colors -->
+    <color name="green_primary">#2E7D32</color>      <!-- Elegant Forest Green -->
+    <color name="green_primary_container">#E8F5E9</color> <!-- Soft mint light background container -->
+    <color name="green_on_primary">#FFFFFF</color>
+    <color name="green_secondary">#4FA3A5</color>
+    <color name="surface_light">#F6FBF6</color>     <!-- Subtle greenish off-white background -->
+    <color name="text_dark">#1B1C1B</color>
 </resources>
