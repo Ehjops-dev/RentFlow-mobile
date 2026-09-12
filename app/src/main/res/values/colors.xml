@@ -3,11 +3,34 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- RentFlow Light Green Theme Colors -->
-    <color name="green_primary">#2E7D32</color>      <!-- Elegant Forest Green -->
-    <color name="green_primary_container">#E8F5E9</color> <!-- Soft mint light background container -->
-    <color name="green_on_primary">#FFFFFF</color>
-    <color name="green_secondary">#4FA3A5</color>
-    <color name="surface_light">#F6FBF6</color>     <!-- Subtle greenish off-white background -->
-    <color name="text_dark">#1B1C1B</color>
+    <!-- RentFlow Stitch Design System Colors -->
+    <color name="primary">#0D631B</color>
+    <color name="primary_container">#2E7D32</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="secondary">#556158</color>
+    <color name="background">#F9F9F9</color>
+    <color name="surface_container_lowest">#FFFFFF</color>
+    <color name="surface_container_low">#F4F3F3</color>
+    <color name="surface_container">#EEEEEE</color>
+    <color name="outline">#707A6C</color>
+    <color name="text_dark">#1A1C1C</color>
+
+    <!-- Specific Colors from Login Mockup -->
+    <color name="login_primary">#2E5541</color>
+    <color name="login_accent">#6FA287</color>
+    <color name="login_input_border">#E5E7EB</color>
+    <color name="login_input_icon">#9CA3AF</color>
+    <color name="login_placeholder">#6B7280</color>
+    <color name="login_text_secondary">#6B7280</color>
+
+    <!-- Aliases for existing layout compatibility -->
+    <color name="green_primary">@color/primary</color>
+    <color name="green_primary_container">#E8F5E9</color>
+    <color name="green_on_primary">@color/on_primary</color>
+    <color name="surface_light">@color/background</color>
+
+    <!-- Semantic Colors -->
+    <color name="error_container">#FFDAD6</color>
+    <color name="on_error_container">#93000A</color>
+    <color name="secondary_container">#D9E6DA</color>
 </resources>

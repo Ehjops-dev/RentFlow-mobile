@@ -1,16 +1,23 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.RentFlow" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary branding color -->
-        <item name="colorPrimary">@color/green_primary</item>
-        <item name="colorOnPrimary">@color/green_on_primary</item>
-        <item name="colorPrimaryContainer">@color/green_primary_container</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorSecondary">@color/secondary</item>
 
         <!-- Status and background coloring -->
-        <item name="android:windowBackground">@color/surface_light</item>
-        <item name="android:statusBarColor">@color/surface_light</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/background</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.RentFlow" parent="Base.Theme.RentFlow" />
+
+    <!-- Custom theme to cleanly turn off Android 12+ native system splash pop window -->
+    <style name="Theme.RentFlow.SplashTheme" parent="Base.Theme.RentFlow">
+        <item name="android:windowBackground">#F9F9F9</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
 </resources>

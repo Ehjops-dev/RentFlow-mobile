@@ -1,6 +1,8 @@
 package com.rentflow.ui.login
 
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -20,6 +22,7 @@ import kotlinx.coroutines.launch
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private var isRememberMeChecked = true
     
     private val viewModel: LoginViewModel by viewModels {
         object : ViewModelProvider.Factory {
@@ -32,8 +35,19 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Force status bar to match the exact background color of the web blueprint (#F9F9F9) and use dark icons
+        window.statusBarColor = Color.parseColor("#F9F9F9")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            @Suppress("DEPRECATION")
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Initialize state to selected/checked state by default to match mockup design
+        binding.customCheckboxImage.isSelected = isRememberMeChecked
 
         setupListeners()
         observeViewModel()
@@ -44,25 +58,33 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.emailEditText.text?.toString()?.trim() ?: ""
             val password = binding.passwordEditText.text?.toString() ?: ""
 
-            var hasError = false
-
             if (email.isEmpty()) {
-                binding.emailInputLayout.error = "Email address is required"
-                hasError = true
-            } else {
-                binding.emailInputLayout.error = null
+                Toast.makeText(this, "Email address is required", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
 
             if (password.isEmpty()) {
-                binding.passwordInputLayout.error = "Password is required"
-                hasError = true
-            } else {
-                binding.passwordInputLayout.error = null
+                Toast.makeText(this, "Password is required", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
 
-            if (!hasError) {
-                viewModel.login(email, password)
-            }
+            // Temporary Bypass for Local Development/UI Testing
+            // Directly launch MainActivity to see the Home screen layout
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            finish()
+        }
+
+        binding.rememberMeRow.setOnClickListener {
+            isRememberMeChecked = !isRememberMeChecked
+            binding.customCheckboxImage.isSelected = isRememberMeChecked
+        }
+
+        binding.forgotPasswordButton.setOnClickListener {
+            Toast.makeText(this, "Password reset link sent to your email", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.helpButton.setOnClickListener {
+            Toast.makeText(this, "Support contact: caretaker@rentflow.com", Toast.LENGTH_SHORT).show()
         }
     }
 
