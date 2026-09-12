@@ -28,9 +28,9 @@ class SplashActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_splash)
 
-        // Perfect 1.8 seconds timeout gating window then hands off to Login Activity
+        // Reduced to 1.0 second for a snappier transition while keeping both steps visible
         lifecycleScope.launch {
-            delay(1800)
+            delay(1000)
             startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
             finish()
         }

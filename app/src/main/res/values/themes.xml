@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.RentFlow" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary branding color -->
@@ -15,9 +15,10 @@
 
     <style name="Theme.RentFlow" parent="Base.Theme.RentFlow" />
 
-    <!-- Custom theme to cleanly turn off Android 12+ native system splash pop window -->
+    <!-- Restoring the splash theme to show the system icon again on a white background -->
     <style name="Theme.RentFlow.SplashTheme" parent="Base.Theme.RentFlow">
         <item name="android:windowBackground">#F9F9F9</item>
-        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">#F9F9F9</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="31">@mipmap/ic_launcher</item>
     </style>
 </resources>
