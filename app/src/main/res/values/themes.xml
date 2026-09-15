@@ -15,6 +15,26 @@
 
     <style name="Theme.RentFlow" parent="Base.Theme.RentFlow" />
 
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemActiveIndicatorStyle">@style/App.ActiveIndicator</item>
+        <item name="itemTextAppearanceActive">@style/App.BottomNav.Text.Selected</item>
+        <item name="itemTextAppearanceInactive">@style/App.BottomNav.Text</item>
+    </style>
+
+    <style name="App.BottomNav.Text" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="App.BottomNav.Text.Selected" parent="App.BottomNav.Text">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="App.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/secondary_container</item>
+        <item name="android:width">44dp</item>
+        <item name="android:height">24dp</item>
+    </style>
+
     <!-- Restoring the splash theme to show the system icon again on a white background -->
     <style name="Theme.RentFlow.SplashTheme" parent="Base.Theme.RentFlow">
         <item name="android:windowBackground">#F9F9F9</item>

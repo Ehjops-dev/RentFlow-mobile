@@ -54,7 +54,20 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
         observeViewModel()
+        updateProfileInitial("Brian Otieno")
         viewModel.loadHomeData()
+    }
+
+    private fun updateProfileInitial(name: String) {
+        val initials = name.split(" ")
+            .filter { it.isNotEmpty() }
+            .take(2)
+            .map { it[0].uppercaseChar() }
+            .joinToString("")
+        
+        binding.profileInitialText.text = initials
+        binding.profileInitialText.visibility = View.VISIBLE
+        binding.profileImage.visibility = View.GONE
     }
 
     private fun setupListeners() {
@@ -72,10 +85,14 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.chatButton.setOnClickListener {
+        binding.whatsappButton.setOnClickListener {
             val url = "https://wa.me/254700000000"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
+        }
+
+        binding.profileIcon.setOnClickListener {
+            Toast.makeText(context, "Opening profile settings...", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -87,21 +104,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        // Temporary Local Mock Data Injection to show the newly integrated Stitch UI on your phone immediately
-        binding.homeProgressBar.visibility = View.GONE
-        binding.homeScrollView.visibility = View.VISIBLE
-
-        // Note: Using hardcoded values for mock display as per Stitch mockup
-        binding.welcomeTextView.text = "Hi, Brian Otieno"
+        // Mock data injection for UI testing on physical device
+        // These IDs now match the refactored high-fidelity layout
+        binding.welcomeTextView.text = "Hi, Brian Otieno 👋"
         binding.unitTextView.text = "Kira Plaza · Unit 4A"
         binding.balanceTextView.text = "15,400.00"
         binding.dueDateTextView.text = "05 October 2026"
-        binding.statusChip.text = "Due in 5 Days"
         binding.accountNumberTextView.text = "KIRA-A1"
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.uiState.collectLatest { state ->
-                // Kept for live integration later
+                // Live integration logic can go here
             }
         }
     }

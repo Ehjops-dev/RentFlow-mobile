@@ -4,57 +4,131 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F9FBF9">
+    android:background="@color/background">
 
-    <!-- Scrollable content matching Stitch spec spacing exactly -->
+    <!-- 1. High-Fidelity App Bar Header -->
+    <LinearLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/background"
+        android:elevation="1dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            app:cardBackgroundColor="@color/login_primary"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="RF"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:text="RentFlow"
+            android:textColor="@color/login_primary"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:letterSpacing="-0.01" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/profileIcon"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:cardBackgroundColor="@color/secondary_container"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- Default Initial Text -->
+                <TextView
+                    android:id="@+id/profileInitialText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="BO"
+                    android:textColor="@color/primary"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <!-- Profile Image (Hidden by default, shown when user uploads a pic) -->
+                <ImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    android:contentDescription="Profile Picture" />
+            </FrameLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/homeScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/appBar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp"
+            android:paddingBottom="100dp">
 
-            <!-- 1. Stitch Spec Greeting Header -->
+            <!-- 2. Greeting Section -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="24dp">
+                android:layout_marginBottom="20dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_alignParentStart="true"
-                    android:layout_toStartOf="@id/supportButton">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/welcomeTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hi, Brian Otieno"
+                        android:text="Hi, Brian Otieno 👋"
                         android:textColor="@color/text_dark"
-                        android:textSize="26sp"
-                        android:textStyle="bold" />
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="-0.02" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_marginTop="2dp"
                         android:gravity="center_vertical"
-                        android:layout_marginTop="4dp">
+                        android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
                             android:src="@android:drawable/ic_dialog_map"
                             app:tint="#556158"
                             android:contentDescription="Unit Icon" />
@@ -66,47 +140,39 @@
                             android:layout_marginStart="4dp"
                             android:text="Kira Plaza · Unit 4A"
                             android:textColor="#556158"
-                            android:textSize="14sp" />
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:background="@drawable/bg_status_pill"
-                            android:backgroundTint="@color/green_primary_container"
+                            android:backgroundTint="#D9E6DA"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="2dp"
                             android:text="Active Lease"
-                            android:textColor="@color/green_primary"
-                            android:textSize="11sp"
+                            android:textColor="#0D631B"
+                            android:textSize="10sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/supportButton"
-                    style="@style/Widget.Material3.Button.IconButton"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:backgroundTint="#EEEEEE"
-                    app:icon="@android:drawable/stat_sys_phone_call"
-                    app:iconTint="#556158" />
             </RelativeLayout>
 
-            <!-- 2. Central Outstanding Balance Card -->
+            <!-- 3. Prominent Balance Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="#E8F5E9"
-                app:cardCornerRadius="28dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_balance_card_gradient"
                     android:orientation="vertical"
                     android:padding="20dp">
 
@@ -114,44 +180,70 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true"
-                            android:text="TOTAL OUTSTANDING BALANCE"
-                            android:textColor="#556158"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                            android:letterSpacing="0.05" />
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/statusChip"
+                            <View
+                                android:layout_width="6dp"
+                                android:layout_height="6dp"
+                                android:background="@drawable/bg_status_pill"
+                                android:backgroundTint="#4CAF50" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:text="TOTAL OUTSTANDING\nBALANCE"
+                                android:textColor="#556158"
+                                android:textSize="10sp"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.05" />
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:background="@drawable/bg_status_pill"
                             android:backgroundTint="#FFDAD6"
-                            android:paddingHorizontal="10dp"
-                            android:paddingVertical="4dp"
-                            android:text="Due in 5 Days"
-                            android:textColor="#93000a"
-                            android:textSize="11sp"
-                            android:textStyle="bold" />
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="3dp">
+
+                            <ImageView
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:src="@android:drawable/ic_menu_recent_history"
+                                app:tint="#BA1A1A"
+                                android:contentDescription="Clock" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:text="Due in 5 Days"
+                                android:textColor="#BA1A1A"
+                                android:textSize="9sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
                     </RelativeLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="12dp"
-                        android:gravity="center_vertical">
+                        android:layout_marginTop="8dp"
+                        android:gravity="bottom"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
                             android:text="KES"
-                            android:textColor="@color/green_primary"
+                            android:textColor="#2E7D32"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
@@ -159,44 +251,55 @@
                             android:id="@+id/balanceTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
+                            android:layout_marginStart="6dp"
                             android:text="15,400.00"
-                            android:textColor="@color/green_primary"
-                            android:textSize="36sp"
-                            android:textStyle="bold" />
+                            android:textColor="#2E7D32"
+                            android:textSize="40sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="-0.02" />
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="0dp"
                         android:layout_marginBottom="16dp"
-                        android:text="Billing Period: October 2026"
+                        android:text="Billing period: October 2026"
                         android:textColor="#556158"
                         android:textSize="12sp" />
 
-                    <!-- Stitch Capsule Breakdown Matrix -->
+                    <!-- Quick Breakdown Capsule (The Itemized Bar) -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/bg_home_card"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:padding="12dp"
-                        android:background="@drawable/bg_capsule_breakdown"
-                        android:gravity="center">
+                        android:paddingVertical="10dp"
+                        android:paddingHorizontal="14dp">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:src="@android:drawable/ic_menu_my_calendar"
-                                app:tint="@color/green_primary"
-                                android:contentDescription="Rent Icon" />
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                app:cardBackgroundColor="#E8F5E9"
+                                app:cardCornerRadius="14dp"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="0dp">
+                                <ImageView
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_home_rent"
+                                    app:tint="#2E7D32"
+                                    android:contentDescription="Rent" />
+                            </com.google.android.material.card.MaterialCardView>
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -209,36 +312,47 @@
                                     android:layout_height="wrap_content"
                                     android:text="Rent"
                                     android:textColor="#556158"
-                                    android:textSize="11sp" />
+                                    android:textSize="10sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="KES 14,000"
                                     android:textColor="@color/text_dark"
-                                    android:textSize="13sp"
+                                    android:textSize="12sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
                         </LinearLayout>
 
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="24dp"
-                            android:background="#E2E2E2" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="6dp"
+                            android:text="-"
+                            android:textColor="#CCCCCC" />
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:src="@android:drawable/ic_menu_compass"
-                                app:tint="@color/green_primary"
-                                android:contentDescription="Water Icon" />
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                app:cardBackgroundColor="#E8F5E9"
+                                app:cardCornerRadius="14dp"
+                                app:cardElevation="0dp"
+                                app:strokeWidth="0dp">
+                                <ImageView
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_home_water"
+                                    app:tint="#2E7D32"
+                                    android:contentDescription="Water" />
+                            </com.google.android.material.card.MaterialCardView>
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -249,16 +363,16 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Water Utility"
+                                    android:text="Water Bill"
                                     android:textColor="#556158"
-                                    android:textSize="11sp" />
+                                    android:textSize="10sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="KES 1,400"
                                     android:textColor="@color/text_dark"
-                                    android:textSize="13sp"
+                                    android:textSize="12sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
                         </LinearLayout>
@@ -266,46 +380,46 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 3. Due Date Calendar Row -->
+            <!-- 4. Due Date Row -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="16dp"
-                app:strokeColor="#E2E2E2"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#0D000000"
                 app:strokeWidth="1dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp">
+                    android:padding="12dp">
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/calendarIconBox"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentStart="true"
+                        android:id="@+id/calendarIcon"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
                         android:layout_centerVertical="true"
                         app:cardBackgroundColor="#E8F5E9"
-                        app:cardCornerRadius="20dp"
+                        app:cardCornerRadius="19dp"
                         app:strokeWidth="0dp">
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_gravity="center"
-                            android:src="@android:drawable/ic_menu_my_calendar"
-                            app:tint="@color/green_primary"
+                            android:src="@drawable/ic_home_calendar"
+                            app:tint="#2E7D32"
                             android:contentDescription="Calendar" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/calendarIconBox"
-                        android:layout_marginStart="12dp"
                         android:layout_centerVertical="true"
+                        android:layout_marginStart="12dp"
+                        android:layout_toEndOf="@id/calendarIcon"
                         android:orientation="vertical">
 
                         <TextView
@@ -313,7 +427,8 @@
                             android:layout_height="wrap_content"
                             android:text="Payment Due Date"
                             android:textColor="#556158"
-                            android:textSize="11sp" />
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/dueDateTextView"
@@ -330,26 +445,27 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:background="#EEEEEE"
-                        android:paddingHorizontal="10dp"
+                        android:background="@drawable/bg_status_pill"
+                        android:backgroundTint="#F4F3F3"
+                        android:paddingHorizontal="12dp"
                         android:paddingVertical="4dp"
                         android:text="Monday"
-                        android:textColor="#1A1C1C"
-                        android:textSize="12sp"
+                        android:textColor="#556158"
+                        android:textSize="11sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 4. Modern Split M-Pesa Cards (Matching Stitch UI exactly) -->
+            <!-- 5. M-Pesa Payment Details -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="28dp"
-                app:strokeColor="#E2E2E2"
-                app:strokeWidth="0dp"
-                app:cardElevation="2dp">
+                app:cardElevation="0dp"
+                app:strokeColor="#0D000000"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -365,14 +481,13 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:gravity="center_vertical"
-                            android:layout_alignParentStart="true">
+                            android:orientation="horizontal">
 
                             <com.google.android.material.card.MaterialCardView
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
-                                app:cardBackgroundColor="@color/green_primary_container"
+                                app:cardBackgroundColor="#2E7D32"
                                 app:cardCornerRadius="16dp"
                                 app:strokeWidth="0dp">
 
@@ -381,7 +496,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:text="M"
-                                    android:textColor="@color/green_primary"
+                                    android:textColor="@color/white"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
                             </com.google.android.material.card.MaterialCardView>
@@ -392,23 +507,37 @@
                                 android:layout_marginStart="10dp"
                                 android:text="Pay via M-Pesa"
                                 android:textColor="@color/text_dark"
-                                android:textSize="16sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:background="@drawable/bg_status_pill"
                             android:backgroundTint="#E8F5E9"
+                            android:gravity="center_vertical"
                             android:paddingHorizontal="10dp"
-                            android:paddingVertical="4dp"
-                            android:text="⚡ Auto-Reconciled"
-                            android:textColor="@color/green_primary"
-                            android:textSize="11sp"
-                            android:textStyle="bold" />
+                            android:paddingVertical="4dp">
+
+                            <ImageView
+                                android:layout_width="14dp"
+                                android:layout_height="14dp"
+                                android:src="@drawable/ic_bolt_green"
+                                app:tint="#2E7D32"
+                                android:contentDescription="Bolt" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:text="Auto-Reconciled"
+                                android:textColor="#2E7D32"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
                     </RelativeLayout>
 
                     <TextView
@@ -417,18 +546,17 @@
                         android:text="Payments link automatically via Safaricom IPN within 60 seconds."
                         android:textColor="#556158"
                         android:textSize="13sp"
-                        android:layout_marginBottom="16dp" />
+                        android:layout_marginBottom="24dp" />
 
-                    <!-- Stitch Segment 1: Paybill Container Row -->
+                    <!-- Paybill Box -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:background="#F4F3F3"
-                        android:padding="16dp"
-                        android:layout_marginBottom="12dp"
+                        android:background="@drawable/bg_home_card"
+                        android:backgroundTint="#F4F3F3"
                         android:gravity="center_vertical"
-                        android:backgroundTint="#F4F3F3">
+                        android:orientation="horizontal"
+                        android:padding="16dp">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -443,41 +571,58 @@
                                 android:textColor="#556158"
                                 android:textSize="10sp"
                                 android:textStyle="bold"
-                                android:letterSpacing="0.03" />
+                                android:letterSpacing="0.05" />
 
                             <TextView
                                 android:id="@+id/paybillNumberTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
                                 android:text="400200"
                                 android:textColor="@color/text_dark"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.02" />
                         </LinearLayout>
 
-                        <com.google.android.material.button.MaterialButton
+                        <LinearLayout
                             android:id="@+id/copyPaybillButton"
-                            style="@style/Widget.Material3.Button.ElevatedButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Copy"
-                            android:textColor="@color/green_primary"
-                            android:backgroundTint="@color/white"
-                            android:textStyle="bold"
-                            app:cornerRadius="999dp" />
+                            android:background="@drawable/bg_copy_button_v2"
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="14dp"
+                            android:paddingVertical="8dp"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@drawable/ic_copy_new"
+                                app:tint="#2E7D32"
+                                android:contentDescription="Copy" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:text="Copy"
+                                android:textColor="#2E7D32"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
                     </LinearLayout>
 
-                    <!-- Stitch Segment 2: Account Reference Container Row -->
+                    <!-- Account Box -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:background="#F4F3F3"
-                        android:padding="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/bg_home_card"
+                        android:backgroundTint="#F4F3F3"
                         android:gravity="center_vertical"
-                        android:backgroundTint="#F4F3F3">
+                        android:orientation="horizontal"
+                        android:padding="16dp">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -492,116 +637,147 @@
                                 android:textColor="#556158"
                                 android:textSize="10sp"
                                 android:textStyle="bold"
-                                android:letterSpacing="0.03" />
+                                android:letterSpacing="0.05" />
 
                             <TextView
                                 android:id="@+id/accountNumberTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
                                 android:text="KIRA-A1"
-                                android:textColor="@color/green_primary"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textColor="#2E7D32"
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.02" />
                         </LinearLayout>
 
-                        <com.google.android.material.button.MaterialButton
+                        <LinearLayout
                             android:id="@+id/copyAccountButton"
-                            style="@style/Widget.Material3.Button.ElevatedButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Copy"
-                            android:textColor="@color/green_primary"
-                            android:backgroundTint="@color/white"
-                            android:textStyle="bold"
-                            app:cornerRadius="999dp" />
+                            android:background="@drawable/bg_copy_button_v2"
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="14dp"
+                            android:paddingVertical="8dp"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@drawable/ic_copy_new"
+                                app:tint="#2E7D32"
+                                android:contentDescription="Copy" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:text="Copy"
+                                android:textColor="#2E7D32"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
                     </LinearLayout>
 
-                    <!-- Stitch Helper Micro-Card Info footer -->
+                    <!-- Helper Micro-Card Info footer -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:orientation="horizontal"
-                        android:background="#E8F5E9"
-                        android:padding="12dp"
-                        android:backgroundTint="#E8F5E9">
+                        android:background="@drawable/bg_home_card"
+                        android:backgroundTint="#F9FBF9"
+                        android:padding="12dp">
 
                         <ImageView
                             android:layout_width="18dp"
                             android:layout_height="18dp"
-                            android:src="@android:drawable/ic_dialog_info"
-                            app:tint="@color/green_primary"
-                            android:contentDescription="Info"
+                            android:src="@drawable/ic_verified_shield"
+                            app:tint="#2E7D32"
+                            android:contentDescription="Verified"
                             android:layout_marginTop="1dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="10dp"
                             android:text="Use standard SIM Toolkit or the M-Pesa App. No manual receipt upload or reference submission is required."
-                            android:textColor="#40493d"
+                            android:textColor="#556158"
                             android:textSize="12sp"
-                            android:lineSpacingMultiplier="1.1" />
+                            android:lineSpacingMultiplier="1.2" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 5. Stitch On-Site Caretaker Module Card -->
+            <!-- 6. Caretaker Section -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="20dp"
-                app:strokeColor="#E2E2E2"
-                app:strokeWidth="0dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#0D000000"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="20dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:text="ON-SITE CARETAKER"
-                            android:textColor="#556158"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                            android:letterSpacing="0.03" />
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="8dp"
+                                android:layout_height="8dp"
+                                android:background="@drawable/bg_status_pill"
+                                android:backgroundTint="#2E7D32" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:text="ON-SITE CARETAKER"
+                                android:textColor="#556158"
+                                android:textSize="10sp"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.05" />
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:text="● Available on-premise"
-                            android:textColor="@color/green_primary"
-                            android:textSize="11sp"
+                            android:text="Available on-premise"
+                            android:textColor="#2E7D32"
+                            android:textSize="10sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:background="#F4F3F3"
-                        android:padding="12dp"
+                        android:background="@drawable/bg_home_card"
+                        android:backgroundTint="#F4F3F3"
                         android:gravity="center_vertical"
-                        android:backgroundTint="#F4F3F3">
+                        android:orientation="horizontal"
+                        android:padding="12dp">
 
                         <com.google.android.material.card.MaterialCardView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            app:cardBackgroundColor="@color/green_primary_container"
-                            app:cardCornerRadius="20dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:cardBackgroundColor="#D9E6DA"
+                            app:cardCornerRadius="24dp"
                             app:strokeWidth="0dp">
 
                             <TextView
@@ -609,16 +785,16 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:text="JM"
-                                android:textColor="@color/green_primary"
-                                android:textSize="14sp"
+                                android:textColor="#2E7D32"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
                         </com.google.android.material.card.MaterialCardView>
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
                             android:layout_weight="1"
-                            android:layout_marginStart="12dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -626,7 +802,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Josphat Mwangi"
                                 android:textColor="@color/text_dark"
-                                android:textSize="14sp"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -637,41 +813,56 @@
                                 android:textSize="12sp" />
                         </LinearLayout>
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/callButton"
-                            style="@style/Widget.Material3.Button.IconButton"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:backgroundTint="@color/white"
-                            app:icon="@android:drawable/stat_sys_phone_call"
-                            app:iconTint="@color/text_dark"
-                            android:layout_marginEnd="6dp" />
+                        <!-- Contact Buttons Layout -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/chatButton"
-                            style="@style/Widget.Material3.Button.IconButton"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:backgroundTint="@color/green_primary"
-                            app:icon="@android:drawable/stat_notify_chat"
-                            app:iconTint="@color/white" />
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/callButton"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                app:cardBackgroundColor="@color/white"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="2dp"
+                                app:strokeWidth="0dp"
+                                android:clickable="true"
+                                android:focusable="true">
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center"
+                                    android:src="@android:drawable/ic_menu_call"
+                                    app:tint="@color/text_dark"
+                                    android:contentDescription="Call" />
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/whatsappButton"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:layout_marginStart="8dp"
+                                app:cardBackgroundColor="#2E7D32"
+                                app:cardCornerRadius="22dp"
+                                app:cardElevation="2dp"
+                                app:strokeWidth="0dp"
+                                android:clickable="true"
+                                android:focusable="true">
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:layout_gravity="center"
+                                    android:src="@android:drawable/stat_notify_chat"
+                                    app:tint="@color/white"
+                                    android:contentDescription="WhatsApp" />
+                            </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <!-- Overlay Loader -->
-    <ProgressBar
-        android:id="@+id/homeProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:indeterminateTint="@color/green_primary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
