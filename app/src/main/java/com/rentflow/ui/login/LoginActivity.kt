@@ -4,6 +4,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.R
 import com.rentflow.MainActivity
 import com.rentflow.databinding.ActivityLoginBinding
 import com.rentflow.util.SessionManager
@@ -23,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private var isRememberMeChecked = true
+    private var isPasswordVisible = false
     
     private val viewModel: LoginViewModel by viewModels {
         object : ViewModelProvider.Factory {
@@ -49,6 +53,9 @@ class LoginActivity : AppCompatActivity() {
         // Initialize state to selected/checked state by default to match mockup design
         binding.customCheckboxImage.isSelected = isRememberMeChecked
 
+        // Set initial password toggle icon to match Material style (Pic 3) instead of legacy Android eye
+        binding.passwordToggle.setImageResource(R.drawable.design_ic_visibility)
+
         setupListeners()
         observeViewModel()
     }
@@ -72,6 +79,19 @@ class LoginActivity : AppCompatActivity() {
             // Directly launch MainActivity to see the Home screen layout
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
+        }
+
+        binding.passwordToggle.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+            if (isPasswordVisible) {
+                binding.passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                binding.passwordToggle.setImageResource(R.drawable.design_ic_visibility_off)
+            } else {
+                binding.passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+                binding.passwordToggle.setImageResource(R.drawable.design_ic_visibility)
+            }
+            binding.passwordToggle.setColorFilter(Color.parseColor("#4B5563"))
+            binding.passwordEditText.setSelection(binding.passwordEditText.text.length)
         }
 
         binding.rememberMeRow.setOnClickListener {
